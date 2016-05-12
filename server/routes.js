@@ -38,8 +38,8 @@ module.exports = (app) => {
   /**
    * Authentication
    */
-  app.get('/api/auth/:service(github)/:slug', aN.authenticateService);
-  app.get('/auth/:service(github)/callback/:slug', aN.authenticateServiceCallback);
+  app.get('/api/auth/:service(github)', aN.authenticateService);
+  app.get('/auth/:service(github)/callback', aN.authenticateServiceCallback);
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
@@ -81,5 +81,4 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga, render);
 };
